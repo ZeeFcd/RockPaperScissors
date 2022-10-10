@@ -1,13 +1,11 @@
-import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-import dataprovider as proc
-
-
+import dataprovider as data
+import sklearn as sk
 
 if __name__ == "__main__":
 
-    data_provider = proc.ImageTrainDataProvider()
+    data_provider = data.ImageTrainDataProvider()
     data_provider.Read_All_Images()
     data_provider.Proccess_All_Images()
     data_provider.Setup_Feature_Vectors()
@@ -19,3 +17,4 @@ if __name__ == "__main__":
     plt.subplot(2, 3, 5), plt.imshow(data_provider.processed_paper_list[0], cmap='gray')
     plt.subplot(2, 3, 6), plt.imshow(data_provider.processed_scissors_list[0], cmap='gray')
     plt.show()
+
