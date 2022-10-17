@@ -4,6 +4,7 @@ import dataprovider as data
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.svm import LinearSVC
+from sklearn.neighbors import KNeighborsClassifier
 from joblib import dump, load
 
 if __name__ == "__main__":
@@ -29,7 +30,8 @@ if __name__ == "__main__":
     y = np.concatenate((rocklabels, paperlabels, scissorslabels), axis=0)
     import pickle
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-    clf = LinearSVC(random_state=0, tol=1e-5)
+    #clf = LinearSVC(class_weight='balanced')
+    clf = KNeighborsClassifier(n_neighbors=3)
     print("model created")
     print("Starting training")
     print(data_provider.rock_feature_vectors[3].shape)
@@ -40,5 +42,5 @@ if __name__ == "__main__":
 
     print(acc)
     print(clf.predict(data_provider.rock_feature_vectors[3].reshape(1, -1)))
-    dump(clf, 'clf.joblib')
+    dump(clf, 'clfKNN.joblib')
 

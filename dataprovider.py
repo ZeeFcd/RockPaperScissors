@@ -43,7 +43,7 @@ class ImageTrainDataProvider:
         hsv_image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
         hue = hsv_image[:, :, 0]
         cut_out_by_hue = cv2.threshold(hue, 40, 255, cv2.THRESH_BINARY_INV)[1]
-        kernel = np.ones((5, 5), np.uint8)
+        kernel = np.ones((5, 5), np.uint8) #cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(5,5))
         # morph_opened_im = cv2.dilate(cv2.erode(cut_out_by_hue, kernel, iterations=1), kernel, iterations=1)
         blurred = cv2.GaussianBlur(cv2.erode(cut_out_by_hue, kernel, iterations=1), (21, 21), 0)
 
